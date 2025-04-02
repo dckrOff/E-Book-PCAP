@@ -61,7 +61,9 @@
     <string name="note_hint">Введите текст заметки…</string>
     <string name="delete_bookmark">Удалить закладку</string>
     <string name="no_bookmarks">У вас пока нет закладок</string>
-    <string name="no_notes">У вас еще нет заметок</string>
+    <string name="no_notes">У вас пока нет заметок</string>
+    <string name="delete_note">Удалить заметку</string>
+    <string name="error_loading_notes">Ошибка при загрузке заметок</string>
     
     <!-- Глоссарий -->
     <string name="glossary">Глоссарий</string>
