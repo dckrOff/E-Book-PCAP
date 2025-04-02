@@ -39,4 +39,10 @@
     <action
         android:id="@+id/action_quizResultsFragment_to_quizSessionFragment"
         app:destination="@id/quizSessionFragment" />
-</fragment> 
+</fragment>
+
+<fragment
+    android:id="@+id/settingsFragment"
+    android:name="uz.dckroff.pcap.features.settings.SettingsFragment"
+    android:label="fragment_settings"
+    tools:layout="@layout/fragment_settings" /> 

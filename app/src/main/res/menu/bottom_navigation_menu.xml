@@ -24,4 +24,9 @@
         android:id="@+id/notesFragment"
         android:icon="@drawable/ic_note"
         android:title="@string/notes" />
+        
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 </menu> 

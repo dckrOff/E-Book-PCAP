@@ -183,4 +183,24 @@
     <string name="attempt_date">Пройден: %s</string>
     <string name="question_number_simple">Вопрос %d</string>
     <string name="error_loading_results">Ошибка при загрузке результатов</string>
+    
+    <!-- Settings Screen -->
+    <string name="settings">Настройки</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="system_theme">Системная (по умолчанию)</string>
+    <string name="light_theme">Светлая</string>
+    <string name="dark_theme">Тёмная</string>
+    <string name="text_size">Размер текста</string>
+    <string name="small">Мелкий</string>
+    <string name="medium">Средний (по умолчанию)</string>
+    <string name="large">Крупный</string>
+    <string name="extra_large">Очень крупный</string>
+    <string name="functionality">Функциональность</string>
+    <string name="auto_save">Автоматическое сохранение</string>
+    <string name="auto_save_description">Автоматически сохранять прогресс чтения и заметки</string>
+    <string name="notifications">Уведомления</string>
+    <string name="notifications_description">Получать уведомления о новом контенте и напоминания об обучении</string>
+    <string name="about">О приложении</string>
+    <string name="app_description">Приложение для изучения сетевых протоколов с обучающими материалами, тестами и глоссарием</string>
+    <string name="version">Версия %s</string>
 </resources>

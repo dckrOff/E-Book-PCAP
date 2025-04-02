@@ -15,6 +15,9 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import uz.dckroff.pcap.databinding.ActivityMainBinding
+import uz.dckroff.pcap.features.settings.domain.SettingsRepository
+import uz.dckroff.pcap.utils.ThemeUtils
+import javax.inject.Inject
 
 /**
  * Главная активность приложения, содержащая Navigation Component
@@ -22,11 +25,19 @@ import uz.dckroff.pcap.databinding.ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var settingsRepository: SettingsRepository
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Применение темы до создания активности
+        settingsRepository.getCurrentSettings().themeMode?.let {
+            ThemeUtils.applyTheme(it)
+        }
+        
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -45,7 +56,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.glossaryFragment,
                 R.id.bookmarksFragment,
                 R.id.notesFragment,
-                R.id.quizListFragment
+                R.id.quizListFragment,
+                R.id.settingsFragment
             ),
             binding.drawerLayout
         )
@@ -78,8 +90,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_settings -> {
                     Timber.d("Переход к настройкам")
-                    // Здесь можно реализовать переход к настройкам
+                    // Переход к настройкам
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    navController.navigate(R.id.settingsFragment)
                     true
                 }
                 R.id.nav_about -> {
@@ -125,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 Timber.d("Переход к настройкам из меню")
-                // Здесь можно реализовать переход к настройкам
+                navController.navigate(R.id.settingsFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
