@@ -71,6 +71,11 @@
     <string name="glossary_definition">Определение</string>
     <string name="related_sections">Связанные разделы</string>
     <string name="no_terms_found">Термины не найдены</string>
+    <string name="search_terms">Поиск терминов</string>
+    <string name="all_categories">Все категории</string>
+    <string name="no_terms">Термины не найдены</string>
+    <string name="error_loading_terms">Ошибка при загрузке терминов</string>
+    <string name="empty_content_list">Пусто</string>
     
     <!-- Настройки -->
     <string name="theme">Тема</string>

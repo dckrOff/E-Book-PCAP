@@ -29,4 +29,10 @@
         app:argType="long"
         app:nullable="true"
         android:defaultValue="null" />
-</fragment> 
+</fragment>
+
+<fragment
+    android:id="@+id/glossaryFragment"
+    android:name="uz.dckroff.pcap.features.glossary.GlossaryFragment"
+    android:label="@string/glossary"
+    tools:layout="@layout/fragment_glossary" /> 
