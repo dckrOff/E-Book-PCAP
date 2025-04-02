@@ -59,7 +59,8 @@
     <string name="notes">Заметки</string>
     <string name="edit_note">Редактировать заметку</string>
     <string name="note_hint">Введите текст заметки…</string>
-    <string name="no_bookmarks">У вас еще нет закладок</string>
+    <string name="delete_bookmark">Удалить закладку</string>
+    <string name="no_bookmarks">У вас пока нет закладок</string>
     <string name="no_notes">У вас еще нет заметок</string>
     
     <!-- Глоссарий -->

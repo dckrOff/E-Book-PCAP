@@ -1,0 +1,5 @@
+<fragment
+    android:id="@+id/bookmarksFragment"
+    android:name="uz.dckroff.pcap.features.bookmarks.BookmarksFragment"
+    android:label="@string/bookmarks"
+    tools:layout="@layout/fragment_bookmarks" /> 
