@@ -21,6 +21,9 @@ interface UserAnswerDao {
     @Query("SELECT COUNT(*) FROM user_answers WHERE quiz_id = :quizId AND attempt_date = :attemptDate")
     suspend fun getTotalAnswersCountForAttempt(quizId: Long, attemptDate: Long): Int
     
+    @Query("SELECT * FROM user_answers WHERE quiz_id = :quizId AND attempt_date = :attemptDate")
+    fun getUserAnswersByQuizAndAttempt(quizId: Long, attemptDate: Long): List<UserAnswer>
+    
     @Insert
     suspend fun insertUserAnswer(userAnswer: UserAnswer): Long
     

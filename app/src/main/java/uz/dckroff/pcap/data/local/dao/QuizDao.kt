@@ -38,4 +38,7 @@ interface QuizDao {
     
     @Query("UPDATE quizzes SET is_completed = :isCompleted, last_score = :score, last_attempt_date = :attemptDate WHERE id = :quizId")
     suspend fun updateQuizCompletion(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long)
+    
+    @Query("UPDATE quizzes SET is_completed = :isCompleted, last_score = :score, last_attempt_date = :attemptDate, last_attempt_start_time = :startTime WHERE id = :quizId")
+    suspend fun updateQuizCompletionWithStartTime(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long, startTime: Long)
 } 

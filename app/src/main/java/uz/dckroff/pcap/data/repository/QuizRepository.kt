@@ -52,6 +52,10 @@ class QuizRepository @Inject constructor(
     suspend fun updateQuizCompletion(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long) = 
         quizDao.updateQuizCompletion(quizId, isCompleted, score, attemptDate)
     
+    fun updateQuizCompletionWithStartTime(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long, startTime: Long) {
+        quizDao.updateQuizCompletionWithStartTime(quizId, isCompleted, score, attemptDate, startTime)
+    }
+    
     // Question operations
     fun getQuestionsByQuiz(quizId: Long): Flow<List<Question>> = 
         questionDao.getQuestionsByQuiz(quizId)
@@ -152,5 +156,40 @@ class QuizRepository @Inject constructor(
         } else {
             0
         }
+    }
+
+    // Методы для работы с ответами пользователя
+    fun getUserAnswersByQuiz(quizId: Long): Flow<List<UserAnswer>> {
+        return userAnswerDao.getUserAnswersByQuiz(quizId)
+    }
+
+    fun getUserAnswersByQuestion(questionId: Long): Flow<List<UserAnswer>> {
+        return userAnswerDao.getUserAnswersByQuestion(questionId)
+    }
+
+    fun getUserAnswersByQuizAndAttempt(quizId: Long, attemptDate: Long): List<UserAnswer> {
+        return userAnswerDao.getUserAnswersByQuizAndAttempt(quizId, attemptDate)
+    }
+
+    fun getCorrectAnswersByQuestion(questionId: Long): Flow<List<Answer>> {
+        return answerDao.getCorrectAnswersByQuestion(questionId)
+    }
+
+    fun getAnswersByIds(answerIds: List<Long>): Flow<List<Answer>> {
+        return answerDao.getAnswersByIds(answerIds)
+    }
+
+    fun addUserAnswer(userAnswer: UserAnswer) {
+        userAnswerDao.insertUserAnswer(userAnswer)
+    }
+
+    fun addUserAnswers(userAnswers: List<UserAnswer>) {
+        userAnswers.forEach { userAnswer ->
+            userAnswerDao.insertUserAnswer(userAnswer)
+        }
+    }
+
+    fun updateQuizCompletion(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long) {
+        quizDao.updateQuizCompletion(quizId, isCompleted, score, attemptDate)
     }
 } 

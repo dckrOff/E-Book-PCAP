@@ -32,4 +32,7 @@ interface AnswerDao {
     
     @Query("DELETE FROM answers WHERE question_id = :questionId")
     suspend fun deleteAnswersForQuestion(questionId: Long)
+    
+    @Query("SELECT * FROM answers WHERE id IN (:answerIds)")
+    fun getAnswersByIds(answerIds: List<Long>): Flow<List<Answer>>
 } 

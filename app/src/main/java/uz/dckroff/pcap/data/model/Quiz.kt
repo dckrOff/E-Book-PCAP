@@ -35,5 +35,11 @@ data class Quiz(
     val lastScore: Int = 0, // Последний результат в процентах
     
     @ColumnInfo(name = "last_attempt_date")
-    val lastAttemptDate: Long = 0 // Дата последней попытки
+    val lastAttemptDate: Long = 0, // Дата последней попытки
+    
+    @ColumnInfo(name = "last_attempt_start_time")
+    val lastAttemptStartTime: Long? = null, // Время начала последней попытки
+    
+    @ColumnInfo(name = "questions_count", defaultValue = "0")
+    val questionsCount: Int = 0 // Количество вопросов в тесте
 ) 

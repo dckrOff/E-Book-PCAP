@@ -338,17 +338,18 @@ class QuizSessionViewModel @Inject constructor(
                 
                 // Обновляем статус прохождения теста
                 val isCompleted = score >= quiz.passingScore
-                quizRepository.updateQuizCompletion(
+                quizRepository.updateQuizCompletionWithStartTime(
                     quizId = quizId,
                     isCompleted = isCompleted,
                     score = score,
-                    attemptDate = attemptTime
+                    attemptDate = attemptTime,
+                    startTime = quizStartTime
                 )
                 
                 // Переходим к экрану результатов
                 _state.value = _state.value.copy(
                     isSubmitting = false,
-                    navigationEvent = QuizSessionNavigationEvent.NavigateToResults(quizId)
+                    navigationEvent = QuizSessionNavigationEvent.NavigateToResults(quizId, score, attemptTime)
                 )
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
@@ -417,5 +418,5 @@ sealed class QuizSessionEvent {
 }
 
 sealed class QuizSessionNavigationEvent {
-    data class NavigateToResults(val quizId: Long) : QuizSessionNavigationEvent()
+    data class NavigateToResults(val quizId: Long, val score: Int, val timestamp: Long) : QuizSessionNavigationEvent()
 } 
