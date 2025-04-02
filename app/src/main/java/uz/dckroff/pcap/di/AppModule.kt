@@ -9,8 +9,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import uz.dckroff.pcap.core.domain.repository.UserProgressRepository
 import uz.dckroff.pcap.data.cache.CacheManager
 import uz.dckroff.pcap.data.cache.impl.SharedPrefsCacheManager
+import uz.dckroff.pcap.data.repository.UserProgressRepositoryImpl
+import uz.dckroff.pcap.database.dao.ChapterDao
+import uz.dckroff.pcap.database.dao.SectionDao
 import uz.dckroff.pcap.features.settings.data.SettingsRepositoryImpl
 import uz.dckroff.pcap.features.settings.domain.SettingsRepository
 import javax.inject.Singleton
@@ -46,5 +50,15 @@ object AppModule {
         gson: Gson
     ): CacheManager {
         return SharedPrefsCacheManager(context, gson)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideUserProgressRepository(
+        cacheManager: CacheManager,
+        sectionDao: SectionDao,
+        chapterDao: ChapterDao
+    ): UserProgressRepository {
+        return UserProgressRepositoryImpl(cacheManager, sectionDao, chapterDao)
     }
 } 

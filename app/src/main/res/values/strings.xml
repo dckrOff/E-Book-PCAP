@@ -231,4 +231,11 @@
     <!-- Dialog buttons -->
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+
+    <!-- Reading Fragment -->
+    <string name="reading_error_loading">Ошибка загрузки содержимого</string>
+    <string name="reading_add_bookmark">Добавить закладку</string>
+    <string name="reading_add_note">Добавить заметку</string>
+    <string name="reading_share">Поделиться</string>
+    <string name="reading_font_settings">Настройки шрифта</string>
 </resources>

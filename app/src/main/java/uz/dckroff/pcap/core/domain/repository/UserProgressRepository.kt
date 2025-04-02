@@ -4,31 +4,47 @@ import kotlinx.coroutines.flow.Flow
 import uz.dckroff.pcap.core.domain.model.UserProgress
 
 /**
- * Интерфейс репозитория для работы с прогрессом пользователя
+ * Репозиторий для работы с прогрессом пользователя
  */
 interface UserProgressRepository {
-    /**
-     * Получить прогресс для раздела
-     */
-    fun getProgressForSection(sectionId: Long): Flow<UserProgress?>
     
     /**
-     * Получить весь прогресс пользователя
+     * Отмечает раздел как прочитанный
+     * @param sectionId ID раздела
      */
-    fun getAllProgress(): Flow<List<UserProgress>>
+    suspend fun markSectionAsRead(sectionId: Long)
     
     /**
-     * Обновить прогресс для раздела
+     * Проверяет, прочитан ли раздел
+     * @param sectionId ID раздела
+     * @return true, если раздел прочитан, иначе false
      */
-    suspend fun updateProgress(progress: UserProgress)
+    suspend fun isSectionRead(sectionId: Long): Boolean
     
     /**
-     * Получить общий процент завершения учебника
+     * Получает список прочитанных разделов
+     * @return список ID прочитанных разделов
      */
-    fun getTotalCompletionPercentage(): Flow<Int>
+    suspend fun getReadSections(): List<Long>
     
     /**
-     * Получить процент завершения для главы
+     * Получает процент завершения для главы
+     * @param chapterId ID главы
+     * @return процент завершения (0-100)
      */
-    fun getChapterCompletionPercentage(chapterId: Long): Flow<Int>
+    suspend fun getChapterCompletionPercentage(chapterId: Long): Int
+    
+    /**
+     * Отмечает тест как пройденный с указанием результата
+     * @param testId ID теста
+     * @param score результат (процент правильных ответов, 0-100)
+     */
+    suspend fun markTestCompleted(testId: Long, score: Int)
+    
+    /**
+     * Получает результат прохождения теста
+     * @param testId ID теста
+     * @return результат прохождения или null, если тест не пройден
+     */
+    suspend fun getTestResult(testId: Long): Int?
 } 
