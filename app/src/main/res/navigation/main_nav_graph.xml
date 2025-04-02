@@ -1,38 +1,91 @@
-<fragment
-    android:id="@+id/bookmarksFragment"
-    android:name="uz.dckroff.pcap.features.bookmarks.BookmarksFragment"
-    android:label="@string/bookmarks"
-    tools:layout="@layout/fragment_bookmarks" />
-
-<fragment
-    android:id="@+id/notesFragment"
-    android:name="uz.dckroff.pcap.features.notes.NotesFragment"
-    android:label="@string/notes"
-    tools:layout="@layout/fragment_notes">
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph">
     
-    <action
-        android:id="@+id/action_notesFragment_to_editNoteFragment"
-        app:destination="@id/editNoteFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-</fragment>
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="uz.dckroff.pcap.features.bookmarks.BookmarksFragment"
+        android:label="@string/bookmarks"
+        tools:layout="@layout/fragment_bookmarks" />
 
-<fragment
-    android:id="@+id/editNoteFragment"
-    android:name="uz.dckroff.pcap.features.notes.EditNoteFragment"
-    android:label="@string/edit_note"
-    tools:layout="@layout/fragment_edit_note">
-    <argument
-        android:name="noteId"
-        app:argType="long"
-        app:nullable="true"
-        android:defaultValue="null" />
-</fragment>
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="uz.dckroff.pcap.features.notes.NotesFragment"
+        android:label="@string/notes"
+        tools:layout="@layout/fragment_notes">
+        
+        <action
+            android:id="@+id/action_notesFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
-<fragment
-    android:id="@+id/glossaryFragment"
-    android:name="uz.dckroff.pcap.features.glossary.GlossaryFragment"
-    android:label="@string/glossary"
-    tools:layout="@layout/fragment_glossary" /> 
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="uz.dckroff.pcap.features.notes.EditNoteFragment"
+        android:label="@string/edit_note"
+        tools:layout="@layout/fragment_edit_note">
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/glossaryFragment"
+        android:name="uz.dckroff.pcap.features.glossary.GlossaryFragment"
+        android:label="@string/glossary"
+        tools:layout="@layout/fragment_glossary" />
+        
+    <fragment
+        android:id="@+id/quizListFragment"
+        android:name="uz.dckroff.pcap.features.quiz.QuizListFragment"
+        android:label="@string/tests"
+        tools:layout="@layout/fragment_quiz_list">
+        
+        <!-- Действие для перехода к экрану прохождения теста -->
+        <action
+            android:id="@+id/action_quizListFragment_to_quizSessionFragment"
+            app:destination="@id/quizSessionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            
+        <!-- Действие для перехода к экрану результатов теста -->
+        <action
+            android:id="@+id/action_quizListFragment_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    
+    <!-- Заглушки для будущих фрагментов -->
+    <fragment
+        android:id="@+id/quizSessionFragment"
+        android:name="uz.dckroff.pcap.features.quiz.QuizSessionFragment"
+        android:label="@string/quiz"
+        tools:layout="@layout/fragment_quiz_session">
+        <argument
+            android:name="quizId"
+            app:argType="long" />
+    </fragment>
+    
+    <fragment
+        android:id="@+id/quizResultsFragment"
+        android:name="uz.dckroff.pcap.features.quiz.QuizResultsFragment"
+        android:label="@string/results"
+        tools:layout="@layout/fragment_quiz_results">
+        <argument
+            android:name="quizId"
+            app:argType="long" />
+    </fragment>
+</navigation> 

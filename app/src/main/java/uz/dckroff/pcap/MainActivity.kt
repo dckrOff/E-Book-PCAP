@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.dashboardFragment,
                 R.id.contentListFragment,
                 R.id.glossaryFragment,
-                R.id.bookmarksFragment
+                R.id.bookmarksFragment,
+                R.id.notesFragment,
+                R.id.quizListFragment
             ),
             binding.drawerLayout
         )
@@ -69,8 +71,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_tests -> {
                     Timber.d("Переход к тестам")
-                    // Здесь можно реализовать переход к списку тестов
+                    // Переход к списку тестов
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    navController.navigate(R.id.quizListFragment)
                     true
                 }
                 R.id.nav_settings -> {

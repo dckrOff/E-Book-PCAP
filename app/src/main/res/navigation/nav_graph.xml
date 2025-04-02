@@ -1,0 +1,39 @@
+<fragment
+    android:id="@+id/quizListFragment"
+    android:name="uz.dckroff.pcap.features.quiz.QuizListFragment"
+    android:label="fragment_quiz_list"
+    tools:layout="@layout/fragment_quiz_list">
+    <action
+        android:id="@+id/action_quizListFragment_to_quizSessionFragment"
+        app:destination="@id/quizSessionFragment" />
+</fragment>
+
+<fragment
+    android:id="@+id/quizSessionFragment"
+    android:name="uz.dckroff.pcap.features.quiz.QuizSessionFragment"
+    android:label="fragment_quiz_session"
+    tools:layout="@layout/fragment_quiz_session">
+    <argument
+        android:name="quizId"
+        app:argType="long" />
+    <action
+        android:id="@+id/action_quizSessionFragment_to_quizResultsFragment"
+        app:destination="@id/quizResultsFragment"
+        app:popUpTo="@id/quizListFragment" />
+</fragment>
+
+<fragment
+    android:id="@+id/quizResultsFragment"
+    android:name="uz.dckroff.pcap.features.quiz.QuizResultsFragment"
+    android:label="fragment_quiz_results"
+    tools:layout="@layout/fragment_quiz_results">
+    <argument
+        android:name="quizId"
+        app:argType="long" />
+    <argument
+        android:name="score"
+        app:argType="integer" />
+    <argument
+        android:name="timestamp"
+        app:argType="long" />
+</fragment> 
