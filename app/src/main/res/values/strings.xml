@@ -126,4 +126,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string name="note_title">Заголовок</string>
+    <string name="note_content">Содержание</string>
+    <string name="error_empty_title">Введите заголовок заметки</string>
+    <string name="error_empty_content">Введите содержание заметки</string>
+    <string name="error_saving_note">Ошибка при сохранении заметки</string>
 </resources>

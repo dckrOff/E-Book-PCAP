@@ -8,4 +8,16 @@
     android:id="@+id/notesFragment"
     android:name="uz.dckroff.pcap.features.notes.NotesFragment"
     android:label="@string/notes"
-    tools:layout="@layout/fragment_notes" /> 
+    tools:layout="@layout/fragment_notes" />
+
+<fragment
+    android:id="@+id/editNoteFragment"
+    android:name="uz.dckroff.pcap.features.notes.EditNoteFragment"
+    android:label="@string/edit_note"
+    tools:layout="@layout/fragment_edit_note">
+    <argument
+        android:name="noteId"
+        app:argType="long"
+        app:nullable="true"
+        android:defaultValue="null" />
+</fragment> 
