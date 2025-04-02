@@ -4,6 +4,7 @@ import uz.dckroff.pcap.data.local.dao.NoteDao
 import uz.dckroff.pcap.data.model.Note
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
 
 @Singleton
 class NoteRepository @Inject constructor(
@@ -22,4 +23,12 @@ class NoteRepository @Inject constructor(
     fun getNotesBySection(sectionId: Long) = noteDao.getNotesBySection(sectionId)
 
     fun getNotesByChapter(chapterId: Long) = noteDao.getNotesByChapter(chapterId)
+
+    suspend fun getAllNotes(): Flow<List<Note>> {
+        return noteDao.getAllNotes()
+    }
+
+    suspend fun getNoteById(noteId: Long): Note? {
+        return noteDao.getNoteById(noteId)
+    }
 } 

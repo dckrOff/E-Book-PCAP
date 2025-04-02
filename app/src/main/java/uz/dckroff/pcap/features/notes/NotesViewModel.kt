@@ -30,6 +30,7 @@ class NotesViewModel @Inject constructor(
             is NotesEvent.NoteClick -> navigateToNote(event.note)
             is NotesEvent.AddNote -> navigateToAddNote()
             is NotesEvent.Retry -> loadNotes()
+            is NotesEvent.NavigationHandled -> clearNavigationEvent()
         }
     }
 
@@ -66,24 +67,39 @@ class NotesViewModel @Inject constructor(
     }
 
     private fun navigateToNote(note: Note) {
-        // TODO: Реализовать навигацию к редактированию заметки
+        _state.value = _state.value.copy(
+            navigationEvent = NotesNavigationEvent.NavigateToEditNote(note.id)
+        )
     }
 
     private fun navigateToAddNote() {
-        // TODO: Реализовать навигацию к созданию новой заметки
+        _state.value = _state.value.copy(
+            navigationEvent = NotesNavigationEvent.NavigateToAddNote
+        )
+    }
+
+    private fun clearNavigationEvent() {
+        _state.value = _state.value.copy(navigationEvent = null)
     }
 }
 
 data class NotesState(
     val isLoading: Boolean = false,
     val notes: List<Note> = emptyList(),
-    val error: String? = null
+    val error: String? = null,
+    val navigationEvent: NotesNavigationEvent? = null
 )
 
 sealed class NotesEvent {
     object LoadNotes : NotesEvent()
     object AddNote : NotesEvent()
     object Retry : NotesEvent()
+    object NavigationHandled : NotesEvent()
     data class DeleteNote(val note: Note) : NotesEvent()
     data class NoteClick(val note: Note) : NotesEvent()
+}
+
+sealed class NotesNavigationEvent {
+    data class NavigateToEditNote(val noteId: Long) : NotesNavigationEvent()
+    object NavigateToAddNote : NotesNavigationEvent()
 } 

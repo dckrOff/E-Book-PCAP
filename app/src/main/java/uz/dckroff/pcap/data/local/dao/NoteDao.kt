@@ -24,6 +24,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes WHERE sectionId = :sectionId")
     fun getNotesBySection(sectionId: Long): Flow<List<Note>>
 
-    @Query("SELECT * FROM notes WHERE chapterId = :chapterId")
+    @Query("SELECT * FROM notes WHERE chapter_id = :chapterId ORDER BY last_modified DESC")
     fun getNotesByChapter(chapterId: Long): Flow<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE id = :noteId")
+    suspend fun getNoteById(noteId: Long): Note?
 } 

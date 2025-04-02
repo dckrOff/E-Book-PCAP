@@ -1,6 +1,8 @@
 package uz.dckroff.pcap.features.notes
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import uz.dckroff.pcap.R
 import uz.dckroff.pcap.databinding.FragmentEditNoteBinding
 
 @AndroidEntryPoint
@@ -55,13 +58,21 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.titleEditText.setOnTextChangedListener { text ->
-            viewModel.onEvent(EditNoteEvent.TitleChanged(text))
-        }
+        binding.titleEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.onEvent(EditNoteEvent.TitleChanged(s.toString()))
+            }
+        })
 
-        binding.contentEditText.setOnTextChangedListener { text ->
-            viewModel.onEvent(EditNoteEvent.ContentChanged(text))
-        }
+        binding.contentEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.onEvent(EditNoteEvent.ContentChanged(s.toString()))
+            }
+        })
 
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -90,14 +101,19 @@ class EditNoteFragment : Fragment() {
 
     private fun updateUI(state: EditNoteState) {
         binding.apply {
-            titleEditText.setText(state.title)
-            contentEditText.setText(state.content)
+            if (titleEditText.text.toString() != state.title) {
+                titleEditText.setText(state.title)
+            }
+            
+            if (contentEditText.text.toString() != state.content) {
+                contentEditText.setText(state.content)
+            }
 
             titleLayout.error = state.titleError
             contentLayout.error = state.contentError
 
             if (state.error != null) {
-                // TODO: Показать ошибку
+                // TODO: Показать ошибку через Snackbar или Toast
             }
 
             if (state.isSaved) {

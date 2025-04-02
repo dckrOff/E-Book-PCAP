@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -95,6 +96,24 @@ class NotesFragment : Fragment() {
             }
 
             adapter.submitList(state.notes)
+
+            // Обработка событий навигации
+            state.navigationEvent?.let { event ->
+                when (event) {
+                    is NotesNavigationEvent.NavigateToEditNote -> {
+                        val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(event.noteId)
+                        findNavController().navigate(action)
+                        // Сбрасываем событие навигации, чтобы избежать повторной навигации
+                        viewModel.onEvent(NotesEvent.NavigationHandled)
+                    }
+                    is NotesNavigationEvent.NavigateToAddNote -> {
+                        val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(null)
+                        findNavController().navigate(action)
+                        // Сбрасываем событие навигации
+                        viewModel.onEvent(NotesEvent.NavigationHandled)
+                    }
+                }
+            }
         }
     }
 
