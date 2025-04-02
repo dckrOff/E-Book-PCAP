@@ -32,7 +32,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/username/EBookPCAP.git
+git clone https://github.com/dckrOff/EBookPCAP.git
 ```
 
 2. Откройте проект в Android Studio
@@ -91,8 +91,8 @@ MIT License
 
 ## Авторы
 
-- Основной разработчик: [Ваше имя]
-- Контрибьюторы: [Список контрибьюторов]
+- Основной разработчик: Азамат Отабоев
+- Контрибьюторы: -
 
 ## История изменений
 
