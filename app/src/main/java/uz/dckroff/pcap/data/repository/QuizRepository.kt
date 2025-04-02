@@ -11,6 +11,7 @@ import uz.dckroff.pcap.data.model.Quiz
 import uz.dckroff.pcap.data.model.UserAnswer
 import javax.inject.Inject
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Singleton
 class QuizRepository @Inject constructor(
@@ -191,5 +192,49 @@ class QuizRepository @Inject constructor(
 
     fun updateQuizCompletion(quizId: Long, isCompleted: Boolean, score: Int, attemptDate: Long) {
         quizDao.updateQuizCompletion(quizId, isCompleted, score, attemptDate)
+    }
+
+    /**
+     * Синхронизирует тесты с сервером
+     * В случае офлайн-режима работает с локальными данными
+     */
+    suspend fun syncQuizzes() {
+        try {
+            // Получаем данные с сервера, если есть соединение
+            if (networkUtils.isNetworkAvailable()) {
+                val quizzes = remoteDataSource.getQuizzes()
+                
+                // Сохраняем тесты в базу данных
+                quizDao.insertQuizzes(quizzes)
+                
+                // Для каждого теста получаем вопросы
+                quizzes.forEach { quiz ->
+                    val questions = remoteDataSource.getQuestions(quiz.id)
+                    
+                    // Сохраняем вопросы в базу данных
+                    questionDao.insertQuestions(questions)
+                    
+                    // Для каждого вопроса получаем варианты ответов
+                    questions.forEach { question ->
+                        val answers = remoteDataSource.getAnswers(question.id)
+                        
+                        // Сохраняем ответы в базу данных
+                        answerDao.insertAnswers(answers)
+                    }
+                }
+                
+                // Сохраняем данные в кэш
+                cacheManager.saveData(CACHE_KEY_QUIZZES_SYNCED, true)
+                cacheManager.saveData(CACHE_KEY_QUIZZES_LAST_SYNC, System.currentTimeMillis())
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Ошибка при синхронизации тестов")
+            // Если произошла ошибка, используем локальные данные
+        }
+    }
+    
+    companion object {
+        private const val CACHE_KEY_QUIZZES_SYNCED = "quizzes_synced"
+        private const val CACHE_KEY_QUIZZES_LAST_SYNC = "quizzes_last_sync"
     }
 } 

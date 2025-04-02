@@ -80,6 +80,9 @@ dependencies {
     // MPAndroidChart for progress visualization
     implementation(libs.mpandroidchart)
     
+    // Gson для сериализации/десериализации JSON
+    implementation("com.google.code.gson:gson:2.10.1")
+    
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

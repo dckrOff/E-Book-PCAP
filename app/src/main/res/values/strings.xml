@@ -203,4 +203,32 @@
     <string name="about">О приложении</string>
     <string name="app_description">Приложение для изучения сетевых протоколов с обучающими материалами, тестами и глоссарием</string>
     <string name="version">Версия %s</string>
+    
+    <!-- Offline Mode -->
+    <string name="offline_mode_enabled">Оффлайн-режим активирован</string>
+    <string name="connection_restored">Подключение к интернету восстановлено</string>
+    <string name="sync_in_progress">Синхронизация данных…</string>
+    <string name="sync_completed">Синхронизация завершена</string>
+    <string name="sync_failed">Ошибка синхронизации</string>
+    <string name="sync_now">Синхронизировать</string>
+    <string name="last_synced">Последняя синхронизация: %s</string>
+    <string name="never_synced">Не синхронизировано</string>
+    <string name="offline_content_warning">Вы просматриваете сохраненную версию контента</string>
+    <string name="offline_mode">Оффлайн-режим</string>
+    <string name="status">Статус</string>
+    <string name="offline_settings">Настройки оффлайн-режима</string>
+    <string name="auto_sync">Автоматическая синхронизация</string>
+    <string name="auto_sync_description">Автоматически синхронизировать данные при восстановлении соединения</string>
+    <string name="download_all_content">Скачать весь контент</string>
+    <string name="download_all_description">Скачать все главы, разделы и тесты для оффлайн-доступа</string>
+    <string name="cache_management">Управление кэшем</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="cache_size">Размер кэша: %s</string>
+    <string name="network_status_online">Подключено к сети</string>
+    <string name="network_status_offline">Оффлайн-режим</string>
+    <string name="confirm_clear_cache">Вы действительно хотите очистить кэш? Все скачанные данные будут удалены.</string>
+    
+    <!-- Dialog buttons -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
